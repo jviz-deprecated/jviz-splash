@@ -1,0 +1,106 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+
+<!-- Import dependencies -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../jviz/jviz.html">
+<link rel="import" href="../jviz-styles/jviz-styles.html">
+<link rel="import" href="../jviz-loading/jviz-loading.html">
+
+<!-- Splash element -->
+<dom-module id="jviz-splash">
+  <template>
+    <style>
+      /* Host variables */
+      :host
+      {
+        --jviz-splash-color-background: var(--jviz-navy);
+        --jviz-splash-color-text: var(--jviz-navy-over);
+      }
+
+      /* Host style */
+      :host
+      {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 5000;
+        background-color: var(--jviz-splash-color-background);
+      }
+
+      /* Title */
+      :host .title
+      {
+        display: inline-block;
+        width: 100%;
+        font-size: 22px;
+        @apply(--jviz-font);
+        text-align: center;
+        font-weight: bold;
+        color: var(--jviz-splash-color-text);
+        margin-top: 20px;
+      }
+
+      /* Detail */
+      :host .detail
+      {
+        display: inline-block;
+        width: 100%;
+        line-height: 22px;
+        @apply(--jviz-font);
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--jviz-splash-color-text);
+        margin-top: 8px;
+      }
+
+      /* Animation */
+      :host jviz-loading
+      {
+        margin-top: 100px;
+      }
+
+      /* Animation visible */
+      :host:not([loading]) jviz-loading { display: none; }
+    </style>
+    <jviz-loading color$="{{ color }}" reflect></jviz-loading>
+    <div class="title" align="center">{{ header }}</div>
+    <div class="detail" align="center">{{ detail }}</div>
+  </template>
+</dom-module>
+
+<!-- Splash screen script -->
+<script>
+  //Initialize the splash screen object
+  var jviz_splash = { is: 'jviz-splash' };
+
+  //Properties
+  jviz_splash.properties = {};
+  jviz_splash.properties.color = { type: String, reflectToAttribute: true, value: 'navy', observer: '_update_color' };
+  jviz_splash.properties.loading = { type: Boolean, reflectToAttribute: true, value: false };
+  jviz_splash.properties.header = { type: String, reflectToAttribute: true };
+  jviz_splash.properties.detail = { type: String, reflectToAttribute: true };
+
+  //Update the splash color
+  jviz_splash._update_color = function(value)
+  {
+    //Update the background color
+    this.customStyle['--jviz-splash-color-background'] = 'var(--jviz-' + value + ')';
+
+    //Update the text color
+    this.customStyle['--jviz-splash-color-text'] = 'var(--jviz-' + value + '-over)';
+
+    //Update the styles
+    this.updateStyles();
+  };
+
+  //Register the splash screen element
+  Polymer(jviz_splash);
+</script>
