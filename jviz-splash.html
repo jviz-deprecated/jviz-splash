@@ -67,8 +67,6 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         margin-top: 100px;
       }
 
-      /* Animation visible */
-      :host:not([loading]) jviz-loading { display: none; }
     </style>
     <jviz-loading color$="{{ color }}" reflect></jviz-loading>
     <div class="title" align="center">{{ header }}</div>
@@ -84,7 +82,6 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
   //Properties
   jviz_splash.properties = {};
   jviz_splash.properties.color = { type: String, reflectToAttribute: true, value: 'navy', observer: '_update_color' };
-  jviz_splash.properties.loading = { type: Boolean, reflectToAttribute: true, value: false };
   jviz_splash.properties.header = { type: String, reflectToAttribute: true };
   jviz_splash.properties.detail = { type: String, reflectToAttribute: true };
 
