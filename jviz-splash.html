@@ -105,6 +105,12 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
     this.updateStyles();
   };
 
+  //Show the splash element
+  jviz_splash.show = function(){ this.visible = true; };
+
+  //Hide the splash element
+  jviz_splash.hide = function(){ this.visible = false; }; 
+
   //Register the splash screen element
   Polymer(jviz_splash);
 </script>
